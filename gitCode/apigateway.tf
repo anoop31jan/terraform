@@ -69,4 +69,15 @@ resource "aws_api_gateway_integration" "integration" {
   uri                     = aws_lambda_function.lambda.invoke_arn
   
 }
+
+resource "aws_api_gateway_method_response" "response_method" {
+  rest_api_id = "${var.rest_api_id}"
+  resource_id = "${var.resource_id}"
+  http_method = "${aws_api_gateway_integration.request_method_integration.http_method}"
+  status_code = "200"
+
+  response_models = {
+    "application/json" = "Empty"
+  }
+}
   
